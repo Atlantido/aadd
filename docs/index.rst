@@ -5,10 +5,8 @@ This repository contains a easy way to deploy the FIWARE IoT Stack through docke
 
 Architecture
 ************
-
 High-level architecture
 =======================
-
 Docker Architecture
 -------------------
 
