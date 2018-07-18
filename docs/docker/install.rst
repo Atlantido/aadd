@@ -1,5 +1,7 @@
+#########################
 How to install docker and docker-compose
-===============
+#########################
+
 
 The first step is go to official page of Docker, select your operating system
 and download Docker Community Edition from Docker Store, to do click
@@ -13,8 +15,9 @@ linux to test this guide was 18.03.1-ce and docker-compose version 1.21.2. If
 you are using linux, remember to change the permissions to avoid putting sudo in
 the docker commands.
 
+*********
 Test if docker container is running
-~~~~~~~~~~~~~~~~~~~
+*********
 
 A simple way to test the fiware-docker-infrastructure running on docker is using
 the next command:
