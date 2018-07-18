@@ -23,8 +23,9 @@ collection do not cover all the services deployed.
 
 Dependencies
 ************
-  * docker (18.03.1-ce)
-  * docker-compose (1.21.2)
+
+docker (18.03.1-ce)
+docker-compose (1.21.2)
 
 Configuration
 *************
