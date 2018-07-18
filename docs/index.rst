@@ -1,18 +1,25 @@
-# FIWARE-Docker-infrastructure
+FIWARE-Docker-infrastructure
+===============
 
-## Introduction
+Introduction
+---------------
+
 This repository contains a easy way to deploy the FIWARE IoT Stack through docker compose
 
-## Architecture
+Architecture
+---------------
 
-### High-level architecture
+High-level architecture
+~~~~~~~~~~~~~~~~~~~
+
 <br>
 
 
 
 <br>
 
-### Docker Architecture
+Docker Architecture
+~~~~~~~~~~~~~~~~~~~
 
 All the services share the subnet and will be reachable through the dns namespaces provided by docker.
 
@@ -33,7 +40,8 @@ collection do not cover all the services deployed.
 All the services in the architecture are deployed using a docker-compose file therefore the configuration options
 are explicitly declared in this file. For services with complex configuration a brief extra description is provided.
 
-### IoT Agent configuration
+IoT Agent configuration
+~~~~~~~~~~~~~~~~~~~
 In order to be able to map the OMA LWM2M information model to OMA NGSI entities, atributes and metadata a configuration
 file is created reflecting the correspondence. **config.js** in the docker-compose/ directory contains two blocks:
 - LwM2M server configuration, specifying aspects like server port, content-format used or the log level of the service.
@@ -57,17 +65,22 @@ be found in the postman collection within the main directory.
 
 More information about the component can be found in the [Cygnus Guide](http://fiware-cygnus.readthedocs.io/en/latest/).
 
-### QuantumLeap, Crate and Grafana configuration
+QuantumLeap, Crate and Grafana configuration
+~~~~~~~~~~~~~~~~~~~
+
 These three components work jointly to accomplish a visual representation of the information in Orion Context Broker.
 QuantumLeap is a library that receives Orion information through subcriptions and stores the information in a Crate database.
 Last, the grafana container launchs a web services with user interface in which the Crate database deployed can be configured
 as data source. A more detailed guide of this services interaction can be found in the use-cases/ directory.
 
-### Perseo-core and Perseo-fe configuration
+Perseo-core and Perseo-fe configuration
+~~~~~~~~~~~~~~~~~~~
+
 Perseo CEP is a Complex Event Processing (CEP) module. In this module, Perseo-core is the back-end of Perseo CEP, the rule-engine. It checks incoming events and, if any action must be done, it call to Perseo-fe through a POST request. Perseo-fe refresh the set of Perseo-core rule periodically. When Perseo-core send an action to Perseo-fe, it is responsible of send an action vía SMS, e-mail or HTTP. A more detailed guide of this services interaction can be found in the use-cases/ directory.
 **docker-compose.yml** In order for Perseo CEP can send a notification, it must have configured the following servers: SMPP, SMTP and HTTP in docker-compose.yml file contained in the docker-compose/ directory. The environment variables available for Perseo configuration can be foun in this [url](https://github.com/telefonicaid/perseo-fe/blob/master/documentation/configuration.md#environment-variables-configuration).
 
-## How to install docker and docker-compose
+How to install docker and docker-compose
+---------------
 
 The first step is go to official page of Docker, select your operating system
 and download Docker Community Edition from Docker Store, to do click
@@ -81,7 +94,9 @@ linux to test this guide was 18.03.1-ce and docker-compose version 1.21.2. If
 you are using linux, remember to change the permissions to avoid putting sudo in
 the docker commands.
 
-### Test if docker container is running
+Test if docker container is running
+~~~~~~~~~~~~~~~~~~~
+
 A simple way to test the fiware-docker-infrastructure running on docker is using
 the next command:
 ```
@@ -100,7 +115,9 @@ $ docker logs {CONTAINER_ID}
 ```
 If there are any errors, the will be displayed.
 
-## Build, deploy and run
+Build, deploy and run
+---------------
+
 The architecture building and execution must contains using docker-compose must contains a previous step, the IoT Agent
 container building. This is due to the LWM2M IoT Agent madurity state. Currently some modifications in its code are needed
 and, for this reason, the modified source code is provided to ensure the interopeability between devices and Orion.
@@ -135,18 +152,24 @@ Stop infrastructure:
 ```
 $ docker-compose down
 ```
-## How to install Postman
+How to install Postman
+---------------
+
 Postman is a tool to realize multiple request to any REST API, for instance,
 Orion REST API. Permit automate functions like obtain entities of Orion, create
 new entity or delete entity. To download Postman click
 [here](https://www.getpostman.com/apps) and select you operating system.
 Furthermore, you can install a version of chrome web store.
 
-## How to use orion Context Broker
+How to use orion Context Broker
+---------------
+
 All subsections use Postman to realise requests and the version of Orion used is
 version 2.
 
-### How to create an entity
+How to create an entity
+~~~~~~~~~~~~~~~~~~~
+
 Is needed a HTTP POST message to create an entity in Orion. The body message
 needs the entity representation in JSON format. And the headers message must
 have “fiware-service”, “fiware-servicepath” and “Content-Type”. Orion use
@@ -187,7 +210,9 @@ code else Orion will return 422 as status code if exist an entity with same
 id or will return 400 as status code if the body message is not in the correct
 format.
 
-### How to retrieve an entity
+How to retrieve an entity
+~~~~~~~~~~~~~~~~~~~
+
 Is needed a HTTP GET method for retrieve an entity from Orion. The URL must have
 the entity id and the headers must have the fields “fiware-service” and “fiware-
 servicepath” to indicate to Orion where to search for the entity.
@@ -206,14 +231,18 @@ If exists an entity with same id in fiware-service and fiware-servicepath then
 Orion will return 200 as status code and the information of the entity else
 Orion will return 404 with status code.
 
-### FIWARE datamodels
+FIWARE datamodels
+~~~~~~~~~~~~~~~~~~~
+
 Fiware datamodels are standars to represent devices in the Fiware architecture.
 They are used with FIWARE NGSI version 2.
 
 You can find more information of the diferents FIWARE datamodels in the
 following URL: https://www.fiware.org/developers/data-models/
 
-### Retrieve an entity with FIWARE datamodel
+Retrieve an entity with FIWARE datamodel
+---------------
+
 Is needed a HTTP GET method for retrieve an entity from Orion. The URL must have
 the entity id and the headers must have the fields “fiware-service” and “fiware-
 servicepath” to indicate to Orion where to search for the entity and a query
@@ -234,7 +263,9 @@ If exists an entity with same id in fiware-service and fiware-servicepath then
 Orion will return 200 as status code and the information of the entity in
 dataModel format else Orion will return 404 with status code.
 
-### How to delete an entity
+How to delete an entity
+~~~~~~~~~~~~~~~~~~~
+
 Is needed a HTTP DELETE method to delete an entity from Orion. The URL must have
 the entity id and the headers must have the fields “fiware-service” and “fiware-
 servicepath” to indicate to Orion where to search for the entity to delete it.
@@ -252,17 +283,23 @@ If exists an entity with same id in fiware-service and fiware-servicepath then
 Orion will return 204 as status code else Orion will return 404 with status
 code.
 
-## Compatibility and versions
+Compatibility and versions
+---------------
+
 The docker-compose service description do not use version tag in the majority of the services. That implies the use of
 the service last version at the time of perform the pull.
 There are some exceptions like the MongoDB version or the IoT Agent that must be build in the host machine.
 
-## To Be Done
+To Be Done
+---------------
+
 * Add FIWARE security stack
 * Create different docker-composes adapting the components to the user case required.
 * Change diagrams and add perseo documentation
 
-## Extensibility
+Extensibility
+---------------
+
 From HOP Ubiquitous we are pretty interested in the extension of the services ready to be deployed. If you have experience
 with any other FIWARE component do not hesitate to contact us.
 
@@ -271,7 +308,9 @@ with any other FIWARE component do not hesitate to contact us.
 - joseluis@hopu.eu
 - felipe@hopu.eu
 
-## Known issues
+Known issues
+---------------
+
 * Currently a IoT Agent memory issue has been discovered. The error implies the service stop and for this reason a restart
 condition is provided in the docker-compose file.
 
