@@ -10,20 +10,15 @@ Architecture
 
 High-level architecture
 =======================
-<br>
-
-
-
-<br>
 
 Docker Architecture
 ===================
 
 All the services share the subnet and will be reachable through the dns namespaces provided by docker.
 
-***
+****
 API
-***
+****
 
 Postman collections covering the main functionalities of each of the services composing the architecture is provided.
 There are services not offering a API to interact with or providing a user interface, for this reasons the postman
@@ -71,6 +66,7 @@ More information about the component can be found in the [Cygnus Guide](http://f
 
 QuantumLeap, Crate and Grafana configuration
 ============================================
+
 These three components work jointly to accomplish a visual representation of the information in Orion Context Broker.
 QuantumLeap is a library that receives Orion information through subcriptions and stores the information in a Crate database.
 Last, the grafana container launchs a web services with user interface in which the Crate database deployed can be configured
