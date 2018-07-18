@@ -25,18 +25,23 @@ All the services share the subnet and will be reachable through the dns namespac
 
 
 
+API
+---------------
 
-## API
 Postman collections covering the main functionalities of each of the services composing the architecture is provided.
 There are services not offering a API to interact with or providing a user interface, for this reasons the postman
 collection do not cover all the services deployed.
 
 
-## Dependencies
+Dependencies
+---------------
+
   * docker (18.03.1-ce)
   * docker-compose (1.21.2)
 
-## Configuration
+Configuration
+---------------
+
 All the services in the architecture are deployed using a docker-compose file therefore the configuration options
 are explicitly declared in this file. For services with complex configuration a brief extra description is provided.
 
@@ -51,7 +56,10 @@ provides a skeleton template.
 
 More information about the component can be found in the [LWM2M IoT Agent Guide](http://fiware-iotagent-lwm2m.readthedocs.io/en/latest/).
 
-### Cygnus configuration
+
+Cygnus configuration
+~~~~~~~~~~~~~~~~~~~
+
 **agent.conf** In order to configure the channels and databases in which the information will persist,
                it is necessary to configure the agent.conf file in the docker-compose/ directory.
                This file will be loaded into the docker container as a configuration file.
