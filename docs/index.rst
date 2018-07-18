@@ -1,4 +1,3 @@
-############################
 FIWARE-Docker-infrastructure
 ############################
 
@@ -15,7 +14,6 @@ Docker Architecture
 
 All the services share the subnet and will be reachable through the dns namespaces provided by docker.
 
-****
 API
 ****
 
@@ -23,13 +21,11 @@ Postman collections covering the main functionalities of each of the services co
 There are services not offering a API to interact with or providing a user interface, for this reasons the postman
 collection do not cover all the services deployed.
 
-************
 Dependencies
 ************
   * docker (18.03.1-ce)
   * docker-compose (1.21.2)
 
-*************
 Configuration
 *************
 
@@ -37,7 +33,7 @@ All the services in the architecture are deployed using a docker-compose file th
 are explicitly declared in this file. For services with complex configuration a brief extra description is provided.
  
 IoT Agent configuration
------------------------
+=======================
 
 In order to be able to map the OMA LWM2M information model to OMA NGSI entities, atributes and metadata a configuration
 file is created reflecting the correspondence. **config.js** in the docker-compose/ directory contains two blocks:
@@ -49,7 +45,7 @@ provides a skeleton template.
 More information about the component can be found in the [LWM2M IoT Agent Guide](http://fiware-iotagent-lwm2m.readthedocs.io/en/latest/).
 
 Cygnus configuration
---------------------
+====================
 **agent.conf** In order to configure the channels and databases in which the information will persist,
                it is necessary to configure the agent.conf file in the docker-compose/ directory.
                This file will be loaded into the docker container as a configuration file.
@@ -64,7 +60,7 @@ be found in the postman collection within the main directory.
 More information about the component can be found in the [Cygnus Guide](http://fiware-cygnus.readthedocs.io/en/latest/).
 
 QuantumLeap, Crate and Grafana configuration
---------------------------------------------
+============================================
 
 These three components work jointly to accomplish a visual representation of the information in Orion Context Broker.
 QuantumLeap is a library that receives Orion information through subcriptions and stores the information in a Crate database.
@@ -72,12 +68,11 @@ Last, the grafana container launchs a web services with user interface in which 
 as data source. A more detailed guide of this services interaction can be found in the use-cases/ directory.
 
 Perseo-core and Perseo-fe configuration
----------------------------------------
+=======================================
 
 Perseo CEP is a Complex Event Processing (CEP) module. In this module, Perseo-core is the back-end of Perseo CEP, the rule-engine. It checks incoming events and, if any action must be done, it call to Perseo-fe through a POST request. Perseo-fe refresh the set of Perseo-core rule periodically. When Perseo-core send an action to Perseo-fe, it is responsible of send an action vía SMS, e-mail or HTTP. A more detailed guide of this services interaction can be found in the use-cases/ directory.
 **docker-compose.yml** In order for Perseo CEP can send a notification, it must have configured the following servers: SMPP, SMTP and HTTP in docker-compose.yml file contained in the docker-compose/ directory. The environment variables available for Perseo configuration can be foun in this [url](https://github.com/telefonicaid/perseo-fe/blob/master/documentation/configuration.md#environment-variables-configuration).
 
-****************************************
 How to install docker and docker-compose
 ****************************************
 
@@ -94,12 +89,12 @@ you are using linux, remember to change the permissions to avoid putting sudo in
 the docker commands.
 
 Test if docker container is running
------------------------------------
+===================================
 
 A simple way to test the fiware-docker-infrastructure running on docker is using
 the next command:
 
-.. code::shell
+.. code-block:: shell
 
   $ docker ps
 
@@ -112,13 +107,12 @@ If all is ok, you should watch information about Orion, like uptime or current
 version. One more thing would be see the log of containers so you could see the
 service messages, use the following command:
 
-.. code::shell
+.. code-block:: shell
 
   $ docker logs {CONTAINER_ID}
 
 If there are any errors, the will be displayed.
 
-*********************
 Build, deploy and run
 *********************
 
@@ -127,11 +121,11 @@ container building. This is due to the LWM2M IoT Agent madurity state. Currently
 and, for this reason, the modified source code is provided to ensure the interopeability between devices and Orion.
 
 Build LWM2M IoT Agent
----------------------
+=====================
 
 Within the IoT Agent folder execute:
 
-.. code::shell
+.. code-block:: shell
 
   $ docker build -t "iotagent:latest" $(pwd) 
 
@@ -141,27 +135,28 @@ include the information that must be mapped between the devices and
 the orion.
 
 Build architecture through docker-compose
------------------------------------------
+=========================================
 
 Launch infrastructure:
 
-.. code::shell
+.. code-block:: shell
 
   $ docker-compose up
 
 Launch infrastructure in background:
 
-.. code::shell
+.. code-block:: shell
 
   $ docker-compose up -d
 
 Stop infrastructure:
-.. code::shell
+
+.. code-block:: shell
 
   $ docker-compose down
 
 How to install Postman
-----------------------
+**********************
 
 Postman is a tool to realize multiple request to any REST API, for instance,
 Orion REST API. Permit automate functions like obtain entities of Orion, create
