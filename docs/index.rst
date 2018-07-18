@@ -1,10 +1,9 @@
 FIWARE-Docker-infrastructure
-############################
 
 This repository contains a easy way to deploy the FIWARE IoT Stack through docker compose
 
-Architectureñgjpñgjsgjñsjgsg
-****************************
+Architecture
+************
 
 High-level architecture
 =======================
