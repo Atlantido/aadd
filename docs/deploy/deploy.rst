@@ -1,13 +1,14 @@
+#########################
 Build, deploy and run
-===============
+#########################
 
 The architecture building and execution must contains using docker-compose must contains a previous step, the IoT Agent
 container building. This is due to the LWM2M IoT Agent madurity state. Currently some modifications in its code are needed
 and, for this reason, the modified source code is provided to ensure the interopeability between devices and Orion.
 
+*********
 Build LWM2M IoT Agent
----------------
-
+*********
 
 Within the IoT Agent folder execute:
 
@@ -20,9 +21,9 @@ file must exist in the docker-compose directory. This directory will
 include the information that must be mapped between the devices and
 the orion.
 
+*********
 Build architecture through docker-compose
----------------
-
+*********
 
 Launch infrastructure:
 
